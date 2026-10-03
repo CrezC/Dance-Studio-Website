@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dance Studio Website
+
+A website for a local dance/fitness studio and event rental space: class
+browsing with external registration links, instructor info, a liability
+waiver flow, and an event rental inquiry form. Built with Next.js (App
+Router), TypeScript, and Tailwind CSS.
+
+See the [product design doc](#) for the full scope and MVP decisions.
+
+## Pages
+
+- `/` — Home
+- `/about` — About the studio
+- `/classes`, `/classes/[slug]` — Class listing and detail
+- `/instructors` — Instructor bios
+- `/event-rental` — Event rental info + inquiry form
+- `/faq` — FAQ
+- `/contact` — Contact info
+
+## Status
+
+Early scaffold: routing, types (`src/lib/types.ts`), and placeholder data
+(`src/lib/data.ts`) are in place. Not yet built: real content/design, the
+admin CMS, liability waiver e-signature flow, and payment integration (see
+the execution plan in the design doc).
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` — start the dev server
+- `npm run build` — production build
+- `npm run lint` — ESLint
