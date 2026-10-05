@@ -1,7 +1,15 @@
 import Link from "next/link";
-import { classes, testimonials } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
+import { testimonials } from "@/lib/data";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const classes = await prisma.class.findMany({
+    orderBy: { name: "asc" },
+    take: 4,
+  });
+
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
       <section className="py-12 text-center sm:text-left">
@@ -38,7 +46,7 @@ export default function Home() {
                 {c.name}
               </Link>
               <p className="mt-1 text-sm text-black/60 dark:text-white/60">
-                {c.dayOfWeek} · {c.time} · {c.price}
+                {c.dayOfWeek} · {c.startTime}–{c.endTime} · {c.price}
               </p>
             </li>
           ))}

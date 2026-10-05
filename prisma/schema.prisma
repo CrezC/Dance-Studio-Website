@@ -1,0 +1,81 @@
+// Prisma schema for the Dance Studio Website MVP.
+// Dev/demo datasource is SQLite (zero setup); swap the provider + url to
+// Postgres for production without changing the models below.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Availability {
+  OPEN
+  LIMITED
+  FULL
+}
+
+enum InquiryStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
+
+model Instructor {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  bio       String
+  photoUrl  String?
+  classes   Class[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Class {
+  id                 String       @id @default(cuid())
+  slug               String       @unique
+  name               String
+  description        String
+  dayOfWeek          String
+  startTime          String
+  endTime            String
+  price              String
+  availability       Availability @default(OPEN)
+  registrationUrl    String
+  paymentUrl         String?
+  instructor         Instructor   @relation(fields: [instructorId], references: [id])
+  instructorId       String
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+}
+
+// One signed record per client liability waiver. Minors are captured via
+// the parent/guardian fields per the original requirement (parent signs on
+// the child's behalf).
+model WaiverSubmission {
+  id             String   @id @default(cuid())
+  waiverVersion  String
+  isMinor        Boolean  @default(false)
+  signerName     String
+  signerEmail    String
+  childName      String?
+  relationship   String?
+  agreedToTerms  Boolean
+  signedAt       DateTime @default(now())
+  ipAddress      String?
+}
+
+model EventRentalInquiry {
+  id          String        @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  eventDate   DateTime?
+  guestCount  Int?
+  message     String
+  status      InquiryStatus @default(NEW)
+  submittedAt DateTime      @default(now())
+}

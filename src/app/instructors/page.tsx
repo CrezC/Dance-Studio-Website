@@ -1,6 +1,12 @@
-import { instructors } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
 
-export default function InstructorsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function InstructorsPage() {
+  const instructors = await prisma.instructor.findMany({
+    orderBy: { name: "asc" },
+  });
+
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
       <h1 className="text-3xl font-semibold tracking-tight">Instructors</h1>

@@ -1,21 +1,6 @@
-export type DanceClass = {
-  slug: string;
-  name: string;
-  instructorSlug: string;
-  dayOfWeek: string;
-  time: string;
-  description: string;
-  price: string;
-  availability: "open" | "limited" | "full";
-  registrationUrl: string;
-};
-
-export type Instructor = {
-  slug: string;
-  name: string;
-  bio: string;
-  photoUrl?: string;
-};
+// Classes and Instructors are modeled in prisma/schema.prisma and typed via
+// the generated Prisma Client. The types below are for content that doesn't
+// (yet) need a database row.
 
 export type Testimonial = {
   author: string;
