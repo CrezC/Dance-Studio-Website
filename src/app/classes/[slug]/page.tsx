@@ -40,14 +40,25 @@ export default async function ClassDetailPage({
         <dd className="text-foreground">{danceClass.price}</dd>
       </dl>
 
-      <Link
-        href={danceClass.registrationUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={cn(buttonVariants({ size: "lg" }), "mt-8 h-12 rounded-full px-7 text-base")}
-      >
-        Register Now
-      </Link>
+      <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <Link
+          href={danceClass.registrationUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(buttonVariants({ size: "lg" }), "h-12 rounded-full px-7 text-base")}
+        >
+          Register Now
+        </Link>
+        <Link
+          href="/waiver"
+          className={cn(
+            buttonVariants({ variant: "outline", size: "lg" }),
+            "h-12 rounded-full bg-transparent px-7 text-base",
+          )}
+        >
+          Complete Liability Waiver
+        </Link>
+      </div>
     </div>
   );
 }
