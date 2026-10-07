@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { buttonVariants } from "@/components/ui/button";
+import { AvailabilityBadge } from "@/components/class-card";
+import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -20,27 +23,28 @@ export default async function ClassDetailPage({
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight">{danceClass.name}</h1>
-      <p className="mt-2 text-black/60 dark:text-white/60">
+    <div className="mx-auto max-w-3xl px-6 py-16 lg:px-8">
+      <div className="flex items-start justify-between gap-4">
+        <h1 className="font-serif text-4xl tracking-tight text-foreground">{danceClass.name}</h1>
+        <AvailabilityBadge availability={danceClass.availability} />
+      </div>
+      <p className="mt-2 text-muted-foreground">
         {danceClass.dayOfWeek} · {danceClass.startTime}–{danceClass.endTime}
       </p>
-      <p className="mt-6 text-black/80 dark:text-white/80">{danceClass.description}</p>
+      <p className="mt-6 text-foreground">{danceClass.description}</p>
 
-      <dl className="mt-8 grid grid-cols-2 gap-y-3 text-sm">
-        <dt className="text-black/50 dark:text-white/50">Instructor</dt>
-        <dd>{danceClass.instructor.name}</dd>
-        <dt className="text-black/50 dark:text-white/50">Price</dt>
-        <dd>{danceClass.price}</dd>
-        <dt className="text-black/50 dark:text-white/50">Availability</dt>
-        <dd className="capitalize">{danceClass.availability.toLowerCase()}</dd>
+      <dl className="mt-8 grid grid-cols-2 gap-y-3 border-t border-border pt-6 text-sm">
+        <dt className="text-muted-foreground">Instructor</dt>
+        <dd className="text-foreground">{danceClass.instructor.name}</dd>
+        <dt className="text-muted-foreground">Price</dt>
+        <dd className="text-foreground">{danceClass.price}</dd>
       </dl>
 
       <Link
         href={danceClass.registrationUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-8 inline-block rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background"
+        className={cn(buttonVariants({ size: "lg" }), "mt-8 h-12 rounded-full px-7 text-base")}
       >
         Register Now
       </Link>
