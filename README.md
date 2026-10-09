@@ -1,5 +1,9 @@
 # Dance Studio Website
 
+**Live:** [dance-studio-website-black.vercel.app](https://dance-studio-website-black.vercel.app/)
+— admin area at [/admin](https://dance-studio-website-black.vercel.app/admin)
+(ask for read-only credentials, or run it locally with your own).
+
 A website for a local dance/fitness studio and event rental space: class
 browsing with external registration links, instructor info, a liability
 waiver flow, an event rental inquiry form, and an admin area to manage it
@@ -85,21 +89,25 @@ in `.env`.
 
 ## Deploying
 
-Deployed on [Vercel](https://vercel.com):
+Live on [Vercel](https://vercel.com). To stand up your own copy:
 
-1. Push this repo to GitHub (already done) and import it in Vercel.
+1. Push this repo to GitHub and import it in Vercel.
 2. Add a Postgres database — easiest is Vercel's **Storage** tab → add the
    **Neon** (Postgres) integration, which sets `DATABASE_URL` for you
    automatically. (Neon's free tier works fine for this project and for
    local dev too, if you'd rather not run Postgres locally.)
-3. In **Settings → Environment Variables**, add `ADMIN_PASSWORD` and
-   `ADMIN_SESSION_SECRET` (generate the latter with `openssl rand -hex 32`).
+3. In **Settings → Environment Variables**, manually add `ADMIN_PASSWORD`
+   and `ADMIN_SESSION_SECRET` (generate the latter with
+   `openssl rand -hex 32`) — the database integration only adds the DB
+   variables, so these two are easy to miss. If you deployed before adding
+   them, trigger a **Redeploy** from the Deployments tab afterward; Vercel
+   doesn't apply new env vars to an already-built deployment.
 4. Deploy. The build runs `prisma migrate deploy` automatically (see
    `package.json`), so the database schema is created/updated on every
    deploy — no manual migration step needed.
-5. Run `npm run db:seed` once against the production `DATABASE_URL` (or
-   just add your real classes/instructors through `/admin` instead of
-   seeding).
+5. Add your real classes/instructors through `/admin`, or run
+   `npm run db:seed` once against the production `DATABASE_URL` for sample
+   data instead.
 
 ## Scripts
 
