@@ -19,7 +19,10 @@ export default async function AdminInstructorsPage({
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="font-serif text-3xl tracking-tight text-foreground">Instructors</h1>
+        <div>
+          <h1 className="font-serif text-3xl tracking-tight text-foreground">Instructors</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{instructors.length} total</p>
+        </div>
         <Link href="/admin/instructors/new" className={cn(buttonVariants(), "rounded-full px-5")}>
           New instructor
         </Link>
@@ -32,39 +35,22 @@ export default async function AdminInstructorsPage({
         </p>
       )}
 
-      <div className="mt-8 overflow-hidden rounded-2xl border border-border">
-        <table className="w-full text-left text-sm">
-          <thead className="bg-muted text-muted-foreground">
-            <tr>
-              <th className="px-4 py-3 font-medium">Name</th>
-              <th className="px-4 py-3 font-medium">Classes</th>
-              <th className="px-4 py-3" />
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border">
-            {instructors.map((instructor) => (
-              <tr key={instructor.id}>
-                <td className="px-4 py-3 text-foreground">{instructor.name}</td>
-                <td className="px-4 py-3 text-muted-foreground">{instructor._count.classes}</td>
-                <td className="px-4 py-3 text-right">
-                  <Link
-                    href={`/admin/instructors/${instructor.id}/edit`}
-                    className="text-primary hover:underline"
-                  >
-                    Edit
-                  </Link>
-                </td>
-              </tr>
-            ))}
-            {instructors.length === 0 && (
-              <tr>
-                <td colSpan={3} className="px-4 py-8 text-center text-muted-foreground">
-                  No instructors yet.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      <div className="mt-8 divide-y divide-border rounded-2xl border border-border bg-card">
+        {instructors.map((instructor) => (
+          <Link
+            key={instructor.id}
+            href={`/admin/instructors/${instructor.id}/edit`}
+            className="flex items-center justify-between gap-4 px-6 py-5 transition-colors hover:bg-muted/50"
+          >
+            <p className="font-serif text-lg text-card-foreground">{instructor.name}</p>
+            <span className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
+              {instructor._count.classes} {instructor._count.classes === 1 ? "class" : "classes"}
+            </span>
+          </Link>
+        ))}
+        {instructors.length === 0 && (
+          <p className="px-6 py-10 text-center text-muted-foreground">No instructors yet.</p>
+        )}
       </div>
     </div>
   );

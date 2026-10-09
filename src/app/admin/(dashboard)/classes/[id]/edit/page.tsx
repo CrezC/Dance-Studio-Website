@@ -25,7 +25,7 @@ export default async function EditClassPage({
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="font-serif text-3xl tracking-tight text-foreground">Edit class</h1>
         <ConfirmDeleteButton
           action={deleteClass.bind(null, id)}

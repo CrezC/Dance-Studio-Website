@@ -1,7 +1,8 @@
 import type { Instructor } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 
-const inputClass = "mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-foreground";
+const inputClass =
+  "mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-foreground outline-none focus:border-ring focus:ring-3 focus:ring-ring/30";
 const labelClass = "block text-sm font-medium text-foreground";
 
 export function InstructorForm({
@@ -14,7 +15,10 @@ export function InstructorForm({
   error?: string;
 }) {
   return (
-    <form action={action} className="mt-8 max-w-xl space-y-4">
+    <form
+      action={action}
+      className="mt-8 max-w-2xl space-y-4 rounded-2xl border border-border bg-card p-6 sm:p-8"
+    >
       {error === "slug-taken" && (
         <p className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
           That slug is already used by another instructor. Choose a different one.
@@ -78,9 +82,11 @@ export function InstructorForm({
         />
       </div>
 
-      <Button type="submit" size="lg" className="h-11 rounded-full px-7 text-base">
-        {instructor ? "Save changes" : "Add instructor"}
-      </Button>
+      <div className="border-t border-border pt-6">
+        <Button type="submit" size="lg" className="h-11 rounded-full px-7 text-base">
+          {instructor ? "Save changes" : "Add instructor"}
+        </Button>
+      </div>
     </form>
   );
 }
