@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Heart, Sparkles, UsersRound } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { studioInfo } from "@/lib/data";
 
 const values = [
   {
@@ -20,12 +21,6 @@ const values = [
     title: "All levels welcome",
     description: "Whether it's your first class or your fifteenth year dancing, there's a spot on the floor for you.",
   },
-];
-
-const hours = [
-  { day: "Monday – Friday", time: "9:00 AM – 9:00 PM" },
-  { day: "Saturday", time: "9:00 AM – 6:00 PM" },
-  { day: "Sunday", time: "11:00 AM – 4:00 PM" },
 ];
 
 export default function AboutPage() {
@@ -84,10 +79,14 @@ export default function AboutPage() {
               <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">Visit the studio</p>
               <h2 className="mt-3 font-serif text-3xl tracking-tight text-foreground">Location &amp; hours</h2>
               <p className="mt-4 text-muted-foreground">
-                123 Main Street, Suite 2<br />
-                Springfield, ST 00000
+                {studioInfo.addressLines.map((line) => (
+                  <span key={line}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
               </p>
-              <p className="mt-2 text-muted-foreground">(555) 123-4567</p>
+              <p className="mt-2 text-muted-foreground">{studioInfo.phone}</p>
               <Link
                 href="/contact"
                 className={cn(buttonVariants({ variant: "outline" }), "mt-6 rounded-full px-5")}
@@ -96,7 +95,7 @@ export default function AboutPage() {
               </Link>
             </div>
             <dl className="divide-y divide-border rounded-2xl border border-border">
-              {hours.map((row) => (
+              {studioInfo.hours.map((row) => (
                 <div key={row.day} className="flex items-center justify-between px-6 py-4">
                   <dt className="text-foreground">{row.day}</dt>
                   <dd className="text-muted-foreground">{row.time}</dd>
