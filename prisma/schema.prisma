@@ -1,13 +1,13 @@
 // Prisma schema for the Dance Studio Website MVP.
-// Dev/demo datasource is SQLite (zero setup); swap the provider + url to
-// Postgres for production without changing the models below.
+// Postgres everywhere (dev and prod) via DATABASE_URL — see README for how
+// to point this at a local or hosted instance.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
